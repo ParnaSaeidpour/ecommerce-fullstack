@@ -4,6 +4,7 @@
 import {  Session } from "next-auth"
 import { signIn } from "next-auth/react"
 import Image from "next/image"
+import Link from "next/link"
 
 
 
@@ -11,7 +12,9 @@ import Image from "next/image"
 export default function Nav({user}:Session){
     return(
         <nav className="flex justify-between items-center py-8">
-            <h1>Style</h1>
+            <Link href={'/'}>
+                <h1>Style</h1>
+            </Link>
             <ul className="flex items-center gap-12">
                 {!user && (
                    
