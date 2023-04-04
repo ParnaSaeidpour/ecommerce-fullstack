@@ -10,7 +10,7 @@ export default function Product({name,image,price}:ProductType){
             <Image src={image} alt={name} width={400} height={400}/>
             
             <h1>{name}</h1>
-            {price !== null ? formatPrice(price): 'N/A'}
+            {price && formatPrice(price)}
         </div>
     )
 }
