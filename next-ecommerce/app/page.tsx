@@ -34,7 +34,7 @@ export default async function Home() {
   return (
     <main>
       {products.map((product)=>(
-        <Product {...product}/>
+        <Product {...product} key={product.id}/>
       ))}
       
     </main>
