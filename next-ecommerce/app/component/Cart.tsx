@@ -23,10 +23,13 @@ export default function Cart(){
     return(
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
          onClick={()=>cartStore.toggleCart()} className="fixed w-full h-screen left-0 top-0 bg-black/25">
+
+            {/*Cart*/}
+
             <motion.div layout onClick={(e)=>e.stopPropagation()} className="bg-white absolute right-0
-            top-0 w-1/4 h-screen p-12
+            top-0 w-full lg:w-2/5 h-screen p-12
             overflow-scroll text-gray-700">
-                <h1>Here's your shopping list 📑 </h1>
+                <button onClick={()=>cartStore.toggleCart()} className="text-sm font-bold pb-12">Back to store 💃</button>
                 {cartStore.cart.map((item)=>(
                     <motion.div layout key={item.id} className="flex py-4 gap-4">
                         <Image className="rounded-md h-24" src={item.image} alt={item.name}
