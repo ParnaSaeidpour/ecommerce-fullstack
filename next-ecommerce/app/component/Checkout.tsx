@@ -6,6 +6,7 @@ import {Elements} from '@stripe/react-stripe-js'
 import { useCartStore } from '@/store';
 import { useState,useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { options } from '@/pages/api/auth/[...nextauth]';
 
 
 // when we want use env from servet to cliend we add next_public befor 
@@ -40,9 +41,24 @@ export default function Checkout(){
 
     },[])
 
+
+    const options: StripeElementsOptions={
+        clientSecret,
+        appearance: {
+            theme:'night',
+            labels:'floating',
+        }
+    }
+
     return(
         <div>
-            <h1>Check out</h1>
+            {clientSecret &&(
+                <div>
+                    <Elements options={options} stripe={stripePromise}>
+                        <h1>Form</h1>
+                    </Elements>
+                </div>
+            )}
         </div>
     )
 
