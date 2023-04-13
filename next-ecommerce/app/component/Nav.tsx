@@ -50,10 +50,12 @@ export default function Nav({user}:Session){
                 )}
 
                 {user && (
+                    <Link href={'/dashboard'}>
                     <li>
                         <Image src={user?.image as string} alt={user.name as string} 
                         width={48} height={48} className="rounded-full"/>
                     </li>
+                    </Link>
                 
                 )}
             </ul>
