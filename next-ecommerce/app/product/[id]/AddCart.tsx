@@ -13,8 +13,8 @@ export default function AddCart({name,id,image,price,quantity}:AddCartType){
     
     return(
         <>
-            <button onClick={()=>cartStore.addProduct({id,image,price,quantity,name})} className="my-12 text-white py-2 
-            px-6 font-medium rounded-md bg-teal-700"> Add to cart </button>
+            <button
+             onClick={()=>cartStore.addProduct({id,image,price,quantity,name})} className="my-4 btn btn-primary"> Add to cart </button>
         </>
     )
 }
