@@ -1,7 +1,8 @@
 import NextAuth,{NextAuthOptions} from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
+
+import {prisma} from '@/util/prisma'
 import Stripe from "stripe"
 
 
@@ -10,7 +11,7 @@ import Stripe from "stripe"
 
 
 
-const prisma = new PrismaClient()
+
 
 export const options:NextAuthOptions={
     adapter: PrismaAdapter(prisma),
@@ -35,6 +36,8 @@ export const options:NextAuthOptions={
         })
 
         // update our prisma with the stripecustomer 
+
+    
 
         await prisma.user.update({
           where:{id:user.id},
