@@ -12,6 +12,7 @@ import {motion} from 'framer-motion'
 
 
 
+
 // when we want use env from servet to cliend we add next_public befor 
 
 const stripePromise=loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
@@ -20,6 +21,7 @@ export default function Checkout(){
     const cartStore= useCartStore()
     const router =useRouter()
     const[clientSecret, setClientSecret]= useState("")
+  
 
 
     useEffect(()=>{

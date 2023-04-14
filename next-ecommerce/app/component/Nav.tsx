@@ -3,12 +3,13 @@
 
 import { useCartStore } from "@/store"
 import {  Session } from "next-auth"
-import { signIn } from "next-auth/react"
+import { signIn,signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import Cart from "./Cart"
 import {AiFillShopping} from 'react-icons/ai'
 import {motion,AnimatePresence} from 'framer-motion'
+import DarkLight from "./DarkLight"
 
 
 
@@ -21,7 +22,7 @@ export default function Nav({user}:Session){
             <Link href={'/'}>
                 <h1>Style</h1>
             </Link>
-            <ul className="flex items-center gap-12">
+            <ul className="flex items-center gap-8">
 
                 <li onClick={()=>cartStore.toggleCart()} className="flex items-center text-3xl relative cursor-pointer">
                     <AiFillShopping/>
@@ -39,6 +40,9 @@ export default function Nav({user}:Session){
                     </AnimatePresence>
                 </li>
 
+               
+                <DarkLight/>
+
 
                 {!user && (
                    
@@ -50,12 +54,31 @@ export default function Nav({user}:Session){
                 )}
 
                 {user && (
-                    <Link href={'/dashboard'}>
+                
                     <li>
-                        <Image src={user?.image as string} alt={user.name as string} 
-                        width={48} height={48} className="rounded-full"/>
+                        <div className="dropdown dropdown-end cursor-pointer">
+                            <Image src={user?.image as string} alt={user.name as string} 
+                            width={48} height={48} className="rounded-full" tabIndex={0}/>
+
+                            <ul tabIndex={0} className="dropdown-content menu p-4 shadow bg-base-100 rounded-box w-52">
+                            <Link className="hover:bg-primary p-4 rounded-md" href={'/dashboard'}
+                            onClick={()=>{
+                                if(document.activeElement instanceof HTMLElement){
+                                    document.activeElement.blur()
+                                }
+                            }}>Orders</Link>
+                            <li   onClick={()=>{
+                                signOut()
+                                if(document.activeElement instanceof HTMLElement){
+                                    document.activeElement.blur()
+                                }
+                            }}
+                            className="hover:bg-primary p-4 rounded-md">Sign out</li>
+
+                            </ul>
+                        </div>
                     </li>
-                    </Link>
+                  
                 
                 )}
             </ul>

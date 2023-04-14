@@ -24,11 +24,11 @@ export default function Cart(){
     
     return(
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
-         onClick={()=>cartStore.toggleCart()} className="fixed w-full h-screen left-0 top-0 bg-black/25">
+         onClick={()=>cartStore.toggleCart()} className="fixed w-full h-screen left-0 top-0">
 
             {/*Cart*/}
 
-            <motion.div layout onClick={(e)=>e.stopPropagation()} className="bg-white absolute right-0
+            <motion.div layout onClick={(e)=>e.stopPropagation()} className="bg-primary absolute right-0
             top-0 w-full lg:w-2/5 h-screen p-12
             overflow-scroll text-gray-700">
 
@@ -42,7 +42,7 @@ export default function Cart(){
                 {cartStore.onCheckout === 'cart' && (
                 <>
                     {cartStore.cart.map((item)=>(
-                        <motion.div layout key={item.id} className="flex py-4 gap-4">
+                        <motion.div layout key={item.id} className="flex py-4 gap-4 my-4 ">
                             <Image className="rounded-md h-24" src={item.image} alt={item.name}
                             width={120} height={120}/>
 
@@ -71,9 +71,9 @@ export default function Cart(){
 
                 <motion.div layout>
 
-                    <p>Total:{formatPrice(totalPrice) }</p>
+                    <p className="font-bold">Total:{formatPrice(totalPrice) }</p>
                         <button onClick={()=> cartStore.setCheckout('checkout')} className="py-2 mt-4
-                        bg-primary w-full rounded-md text-white">Checkout</button>
+                        btn btn-secondary w-full rounded-md text-white">Checkout</button>
                     
                 </motion.div>
                 ):null}
