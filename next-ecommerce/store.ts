@@ -72,3 +72,20 @@ export const useCartStore=create<CartState>()(
         )
 
 )
+
+type ThemeState={
+    mode:'coffee' | 'night',
+    toggleMode:(theme:'coffee' |'night')=>void
+}
+
+
+export const useThemStore=create<ThemeState>()(
+    persist(
+        (set)=>({
+            mode:'coffee',
+            toggleMode:(theme)=>set((state)=>({mode:theme})),
+        }),
+        {name:'theme-store'}
+
+    )
+)

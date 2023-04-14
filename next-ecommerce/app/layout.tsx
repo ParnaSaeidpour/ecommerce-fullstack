@@ -25,13 +25,13 @@ export default async function RootLayout({
   
 
   return (
-    <html lang="en">
-      <body className={`mx-4 lg:mx-48 ${roboto.className}`}>
+    <html  className={` ${roboto.className}`} lang="en">
+     
         <Hydrate>
           <Nav user={session?.user} expires={session?.expires as string} />
           {children}
         </Hydrate>
-      </body>
+      
     </html>
   )
 }
