@@ -12,6 +12,8 @@ export default async function Product({searchParams}:SearchParamTypes) {
             alt={searchParams.name} 
             width={600} 
             height={600}
+
+            priority={true}
             
             />
             
