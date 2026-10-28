@@ -21,7 +21,8 @@ export default function Checkout(){
     const cartStore= useCartStore()
     const router =useRouter()
     const[clientSecret, setClientSecret]= useState("")
-  
+    const[error, setError]= useState("")
+
 
 
     useEffect(()=>{
@@ -35,13 +36,19 @@ export default function Checkout(){
             })
         }).then((res)=>{
             if(res.status ===403){
-                return router.push('api/auth/signin')
+                router.push('api/auth/signin')
+                return null
             }
             return res.json()
         }).then((data)=>{
+           if(!data) return
+           if(!data.paymentIntent){
+               setError(data.message || "Could not start checkout")
+               return
+           }
            setClientSecret(data.paymentIntent.client_secret)
            cartStore.setPaymentIntent(data.paymentIntent.id)
-        })
+        }).catch(()=>setError("Could not start checkout"))
 
 
     },[])
@@ -57,7 +64,8 @@ export default function Checkout(){
 
     return(
         <div>
-            {!clientSecret && <OrderAnimation/>}
+            {error && <p className="text-error py-4">{error}</p>}
+            {!clientSecret && !error && <OrderAnimation/>}
             {clientSecret &&(
                 <motion.div initial={{opacity:0}} animate={{opacity:1}}>
                     <Elements options={options} stripe={stripePromise}>
