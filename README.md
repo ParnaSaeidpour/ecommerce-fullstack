@@ -92,6 +92,15 @@ See [`next-ecommerce/.env.example`](next-ecommerce/.env.example). Never commit y
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key (browser) |
 | `STRIPE_WEBHOOK_SECRET` | Verifies Stripe webhook signatures |
 
+## Deploying to Vercel
+
+1. Create a free PostgreSQL database (for example [Neon](https://neon.tech)) and copy its connection string.
+2. Import the repository in [Vercel](https://vercel.com/new) and set **Root Directory** to `next-ecommerce`.
+3. Add the environment variables from the table above. Set `NEXTAUTH_URL` to your Vercel URL.
+4. Deploy. The `vercel-build` script generates the Prisma client, applies the database migrations and builds the app.
+5. In Google Cloud Console, add `https://<your-app>.vercel.app/api/auth/callback/google` as an authorised redirect URI.
+6. In the Stripe dashboard (test mode), add a webhook endpoint `https://<your-app>.vercel.app/api/webhooks` for the `charge.succeeded` event, put its signing secret in `STRIPE_WEBHOOK_SECRET`, and redeploy.
+
 ## Tests
 
 ```bash
