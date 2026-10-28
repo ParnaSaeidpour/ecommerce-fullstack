@@ -6,6 +6,14 @@ Products and prices are managed in Stripe. Logged-in users add products to a car
 
 > Originally built in April 2023. Security fixes, tests and CI were added in October 2026 (see [Changelog](#changelog)).
 
+## Screenshots
+
+*Running locally with test products.*
+
+| Store | Cart | Order history |
+|---|---|---|
+| ![Store page with products](docs/screenshots/store.png) | ![Cart with two items](docs/screenshots/cart.png) | ![Completed order on the dashboard](docs/screenshots/orders.png) |
+
 ## Features
 
 - Product catalogue loaded from Stripe (server components)
@@ -140,7 +148,8 @@ next-ecommerce/
 - Fixed: the API kept running after sending an error response; added input validation and `405` for non-POST requests.
 - Fixed: production build failed on a fresh clone (`session.user.id` type); added NextAuth type declaration.
 - Checkout page shows an error message instead of crashing when the API returns an error.
-- Added Vitest tests, GitHub Actions CI and `.env.example`.
+- Fixed: the order dashboard opened a new database connection on every request; it now reuses the shared Prisma client.
+- Added Vitest tests, GitHub Actions CI, `.env.example` and Vercel deployment setup.
 
 **April 2023**
 - Original version.
