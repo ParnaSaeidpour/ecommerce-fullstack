@@ -15,7 +15,7 @@ import DarkLight from "./DarkLight"
 
 
 
-export default function Nav({user}:Session){
+export default function Nav({user}:{user?:Session["user"], expires:string}){
     const cartStore=useCartStore()
     return(
         <nav className="flex justify-between items-center py-12">

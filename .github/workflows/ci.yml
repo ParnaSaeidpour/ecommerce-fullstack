@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: next-ecommerce
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: next-ecommerce/package-lock.json
+      - run: npm ci
+      - run: npx prisma generate
+      - run: npm test
+      - name: Build
+        run: npm run build
+        env:
+          # Placeholders: the build only needs the variables to exist
+          DATABASE_URL: postgresql://user:password@localhost:5432/ci
+          NEXTAUTH_SECRET: ci-placeholder
+          GOOGLE_CLIENT_ID: ci-placeholder
+          GOOGLE_CLIENT_SECRET: ci-placeholder
+          STRIPE_SECRET_KEY: ci-placeholder
+          NEXT_TELEMETRY_DISABLED: 1

@@ -1,6 +1,6 @@
 import {options} from "@/pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/util/prisma";
 import formatPrice from "@/util/PriceFormat";
 import Image from "next/image";
 
@@ -9,7 +9,6 @@ export const revalidate=0
 
 
 const fetchOrders=async()=>{
-  const prisma= new PrismaClient()
   const user =await getServerSession(options)
   if(!user){
      return null
