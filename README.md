@@ -4,7 +4,7 @@ A full-stack online store built with **Next.js 13 (App Router)**, **TypeScript**
 
 Products and prices are managed in Stripe. Logged-in users add products to a cart, pay with Stripe Elements, and see their completed orders on a dashboard.
 
-> Originally built in April 2023. Security fixes, tests and CI were added in October 2026 (see [Changelog](#changelog)).
+> Built in April 2023. Updated in October 2026 with server-side pricing, tests and CI.
 
 ## Screenshots
 
@@ -139,17 +139,3 @@ next-ecommerce/
 ├── store.ts                  # Zustand cart and theme stores
 └── __tests__/                # Vitest tests
 ```
-
-## Changelog
-
-**October 2026**
-- Fixed: the checkout total was calculated from prices sent by the browser, so a modified request could change the amount charged. Prices are now looked up in Stripe on the server.
-- Fixed: a payment intent id from another user's order could be used to overwrite that order. Only the user's own pending orders are updated now.
-- Fixed: the API kept running after sending an error response; added input validation and `405` for non-POST requests.
-- Fixed: production build failed on a fresh clone (`session.user.id` type); added NextAuth type declaration.
-- Checkout page shows an error message instead of crashing when the API returns an error.
-- Fixed: the order dashboard opened a new database connection on every request; it now reuses the shared Prisma client.
-- Added Vitest tests, GitHub Actions CI, `.env.example` and Vercel deployment setup.
-
-**April 2023**
-- Original version.
